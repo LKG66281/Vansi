@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // =========================
+    // ELEMENTS
+    // =========================
+
     const loginForm =
         document.getElementById('login-form')
 
@@ -29,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isLogin = true
 
+    // =========================
     // PARTICLES
+    // =========================
 
     function createParticles() {
 
@@ -155,7 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createParticles()
 
-    // SWITCHING
+    // =========================
+    // SWITCH LOGIN / SIGNUP
+    // =========================
 
     function switchToLogin() {
 
@@ -217,7 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     )
 
+    // =========================
     // TOAST
+    // =========================
 
     function showToast(
         message,
@@ -235,12 +245,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
 
-            toast.classList.remove('show')
+            toast.classList.remove(
+                'show'
+            )
 
         }, 4000)
     }
 
+    // =========================
     // LOGIN
+    // =========================
 
     async function handleLogin(e) {
 
@@ -256,31 +270,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 'login-password'
             ).value
 
-        loginBtn.classList.add('loading')
+        if (!email || !password) {
+
+            showToast(
+                "Fill all fields"
+            )
+
+            return
+        }
+
+        loginBtn.classList.add(
+            'loading'
+        )
 
         try {
 
             const { data, error } =
-                await supabaseClient.auth
+                await supabaseClient
+                .auth
                 .signInWithPassword({
 
-                    email,
-                    password
+                    email: email,
+                    password: password
                 })
 
-            if (error) throw error
+            if (error) {
+
+                throw error
+            }
 
             showToast(
-                "Welcome back.",
-                'success'
+                "Login successful",
+                "success"
             )
 
             setTimeout(() => {
 
                 window.location.href =
-                    'dashboard.html'
+                    "dashboard.html"
 
-            }, 800)
+            }, 1000)
 
         } catch (error) {
 
@@ -296,7 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // =========================
     // SIGNUP
+    // =========================
 
     async function handleSignup(e) {
 
@@ -322,6 +353,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 'signup-confirm'
             ).value
 
+        if (!username ||
+            !email ||
+            !password ||
+            !confirm) {
+
+            showToast(
+                "Fill all fields"
+            )
+
+            return
+        }
+
         if (password !== confirm) {
 
             showToast(
@@ -338,21 +381,20 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
 
             const { data, error } =
-                await supabaseClient.auth
+                await supabaseClient
+                .auth
                 .signUp({
 
-                    email,
-                    password,
-
-                    options: {
-
-                        data: {
-                            username
-                        }
-                    }
+                    email: email,
+                    password: password
                 })
 
-            if (error) throw error
+            if (error) {
+
+                throw error
+            }
+
+            // SUCCESS MESSAGE
 
             document
                 .getElementById(
@@ -362,22 +404,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 .remove('hidden')
 
             showToast(
-                "Account created.",
-                'success'
+                "Signup successful",
+                "success"
             )
+
+            signupForm.reset()
+
+            // AUTO SWITCH
 
             setTimeout(() => {
 
                 switchToLogin()
 
-                document
-                    .getElementById(
-                        'verification-notice'
-                    )
-                    .classList
-                    .add('hidden')
-
-            }, 2500)
+            }, 3000)
 
         } catch (error) {
 
@@ -393,17 +432,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loginForm.addEventListener(
-        'submit',
-        handleLogin
-    )
-
-    signupForm.addEventListener(
-        'submit',
-        handleSignup
-    )
-
-    // RESET PASSWORD
+    // =========================
+    // PASSWORD RESET
+    // =========================
 
     document
         .getElementById(
@@ -424,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!email) {
 
                     showToast(
-                        "Enter your email first"
+                        "Enter your email"
                     )
 
                     return
@@ -439,11 +470,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             email
                         )
 
-                    if (error) throw error
+                    if (error) {
+
+                        throw error
+                    }
 
                     showToast(
-                        "Reset link sent.",
-                        'success'
+                        "Reset email sent",
+                        "success"
                     )
 
                 } catch (err) {
@@ -454,6 +488,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         )
+
+    // =========================
+    // EVENTS
+    // =========================
+
+    loginForm.addEventListener(
+        'submit',
+        handleLogin
+    )
+
+    signupForm.addEventListener(
+        'submit',
+        handleSignup
+    )
+
+    // =========================
+    // FOCUS
+    // =========================
 
     setTimeout(() => {
 
