@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>VansI - Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body class="dark">
+
+    <canvas id="bg-particles"></canvas>
+
+    <canvas id="mouse-trail"></canvas>
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <div class="logo">
+                VansI
+            </div>
+
+            <ul class="nav-menu">
+
+                <li class="nav-item active"
+                    data-section="courses">
+
+                    📚 Courses
+                </li>
+
+                <li class="nav-item"
+                    data-section="quests">
+
+                    ⚔️ Quests
+                </li>
+
+                <li class="nav-item"
+                    data-section="coding">
+
+                    💻 Coding Area
+                </li>
+
+                <li class="nav-item"
+                    data-section="profile">
+
+                    👤 Profile
+                </li>
+
+                <li class="nav-item"
+                    data-section="account">
+
+                    ⚙️ Account
+                </li>
+
+                <li class="nav-item"
+                    data-section="ai">
+
+                    🤖 AI Assistant
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="main-content">
+
+            <div class="top-bar">
+
+                <input type="text"
+                       class="search-bar"
+                       placeholder="Search problems, courses, or users...">
+
+                <div style="display:flex; gap:15px; align-items:center;">
+
+                    <button onclick="toggleTheme()"
+                            class="theme-toggle">
+
+                        ☀️
+                    </button>
+
+                    <div class="user-avatar"></div>
+
+                </div>
+
+            </div>
+
+            <!-- Courses -->
+
+            <div id="courses"
+                 class="content-section active">
+
+                <h1>
+                    Learning Paths
+                </h1>
+
+                <p>
+                    Master the art of coding with beautiful,
+                    structured courses.
+                </p>
+
+                <div class="card-grid">
+
+                    <div class="course-card">
+
+                        <h3>
+                            🌐 SKML Foundations
+                        </h3>
+
+                        <p>
+                            HTML, CSS & JavaScript —
+                            Build your first websites from scratch.
+                        </p>
+
+                        <button class="glow-btn">
+                            Continue Course
+                        </button>
+
+                    </div>
+
+                    <div class="course-card">
+
+                        <h3>
+                            ⚡ JavaScript Ecosystem
+                        </h3>
+
+                        <p>
+                            Modern JS, React, Node.js,
+                            TypeScript and beyond.
+                        </p>
+
+                        <button class="glow-btn">
+                            Continue Course
+                        </button>
+
+                    </div>
+
+                    <div class="course-card">
+
+                        <h3>
+                            🐍 Python Mastery
+                        </h3>
+
+                        <p>
+                            Data Science, Algorithms &
+                            Backend Development.
+                        </p>
+
+                        <button class="glow-btn">
+                            Start Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="quests"
+                 class="content-section">
+
+                Quests Content Here...
+
+            </div>
+
+            <div id="coding"
+                 class="content-section">
+
+                Coding Arena Content Here...
+
+            </div>
+
+            <div id="profile"
+                 class="content-section">
+
+                Profile Content Here...
+
+            </div>
+
+            <div id="account"
+                 class="content-section">
+
+                Account Settings Here...
+
+            </div>
+
+            <div id="ai"
+                 class="content-section">
+
+                AI Assistant Settings Here...
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>
+            © 2026 Vansi.
+            Made by Siddharth and Vanni
+        </p>
+    </footer>
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script src="backend/supabase.js"></script>
+
+    <script src="js/auth.js"></script>
+
+    <!-- YOUR JS -->
+
+    <script src="js/main.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

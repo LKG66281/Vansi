@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>VansI - Master the Code</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body class="dark">
+
+    <canvas id="mouse-trail"></canvas>
+
+    <header>
+        <div class="logo">VansI</div>
+
+        <nav>
+            <ul>
+                <li><a href="#">Problems</a></li>
+                <li><a href="#">Contests</a></li>
+                <li><a href="#">Learn</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Leaderboard</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-buttons">
+
+            <button onclick="toggleTheme()"
+                    class="theme-toggle">
+                ☀️
+            </button>
+
+            <button onclick="handleSignIn()"
+                    class="btn btn-secondary">
+                Sign In
+            </button>
+
+            <button onclick="handleSignUp()"
+                    class="btn btn-primary">
+                Start Free
+            </button>
+
+        </div>
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Code. Compete.<br>
+                Elevate.
+            </h1>
+
+            <p>
+                The most beautiful coding platform on the internet.
+                Solve challenges, join contests, and become a better developer.
+            </p>
+
+            <div class="cta-buttons">
+
+                <button onclick="handleSignUp()"
+                        class="btn btn-primary"
+                        style="padding:18px 42px; font-size:1.2rem;">
+
+                    Start Coding Now
+                </button>
+
+                <a href="dashboard.html"
+                   class="btn btn-secondary"
+                   style="padding:18px 42px; font-size:1.2rem;">
+
+                    Go to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="features">
+
+        <h2 class="section-title">
+            Why VansI?
+        </h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🌌 Immersive Experience</h3>
+
+                <p>
+                    Beautiful interface with particle effects,
+                    smooth animations, and themes that feel alive.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚡ Real-time Contests</h3>
+
+                <p>
+                    Compete with coders worldwide in live contests
+                    with instant leaderboards.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>📚 Smart Learning Paths</h3>
+
+                <p>
+                    AI-powered recommendations and structured
+                    roadmaps tailored to your level.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>
+            &copy; 2026 VansI.
+            Made by Siddharth & Vanni
+        </p>
+    </footer>
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script src="backend/supabase.js"></script>
+
+    <script src="js/auth.js"></script>
+
+    <!-- YOUR JS -->
+
+    <script src="js/main.js"></script>
+
+    <script src="js/home.js"></script>
+
+</body>
+</html>

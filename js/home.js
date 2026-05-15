@@ -1,0 +1,138 @@
+// Clerk Setup
+let clerk;
+
+async function initClerk() {
+    try {
+        clerk = await Clerk.load({
+            publishableKey: 'pk_test_YOUR_CLERK_PUBLISHABLE_KEY_HERE'  // ← Replace with your real key later
+        });
+        console.log("Clerk loaded successfully");
+    } catch (e) {
+        console.log("Clerk not initialized yet - using demo mode");
+    }
+}
+
+function handleSignIn() {
+    if (clerk) {
+        clerk.openSignIn();
+    } else {
+        alert("Sign In - Clerk would open here (Demo Mode)");
+    }
+}
+
+function handleSignUp() {
+    if (clerk) {
+        clerk.openSignUp();
+    } else {
+        alert("Sign Up - Clerk would open here (Demo Mode)");
+    }
+}
+
+function toggleTheme() {
+    const body = document.body;
+    const toggleBtn = document.querySelector('.theme-toggle');
+    
+    if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        if (toggleBtn) toggleBtn.textContent = '🌙';
+    } else {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        if (toggleBtn) toggleBtn.textContent = '☀️';
+    }
+}
+
+// Mouse Trail Effect
+function initMouseTrail() {
+    const canvas = document.getElementById('mouse-trail');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0;
+    let particles = [];
+    let mouse = { x: 0, y: 0, prevX: 0, prevY: 0 };
+
+    class Particle {
+        constructor(x, y, color) {
+            this.x = x; this.y = y;
+            this.vx = (Math.random() - 0.5) * 3;
+            this.vy = (Math.random() - 0.5) * 3;
+            this.life = 60 + Math.random() * 40;
+            this.color = color;
+            this.size = Math.random() * 4 + 2;
+        }
+        update() {
+            this.x += this.vx; 
+            this.y += this.vy;
+            this.vx *= 0.98; 
+            this.vy *= 0.98;
+            this.life--;
+        }
+        draw() {
+            const alpha = this.life / 100;
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = this.color;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+
+    function animate() {
+        ctx.fillStyle = document.body.classList.contains('dark') 
+            ? 'rgba(10,10,15,0.15)' 
+            : 'rgba(240,244,255,0.15)';
+        ctx.fillRect(0, 0, width, height);
+       
+        if (Math.hypot(mouse.x - mouse.prevX, mouse.y - mouse.prevY) > 8) {
+            const isDark = document.body.classList.contains('dark');
+            const trailColor = isDark 
+                ? (Math.random() > 0.5 ? '#00f5ff' : '#ff00ff') 
+                : (Math.random() > 0.5 ? '#0066ff' : '#8a2be2');
+            
+            for (let i = 0; i < 4; i++) {
+                particles.push(new Particle(mouse.x, mouse.y, trailColor));
+            }
+            mouse.prevX = mouse.x;
+            mouse.prevY = mouse.y;
+        }
+       
+        for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            particles[i].draw();
+            if (particles[i].life <= 0) particles.splice(i, 1);
+        }
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    window.addEventListener('resize', resize);
+
+    resize();
+    animate();
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    initClerk();
+    initMouseTrail();
+    
+    // Keyboard shortcut for theme toggle
+    document.addEventListener('keydown', e => {
+        if (e.key.toLowerCase() === 't') toggleTheme();
+    });
+});
