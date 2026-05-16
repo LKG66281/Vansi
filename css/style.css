@@ -197,3 +197,46 @@ footer {
 footer p {
     margin: 0;
 }
+/* =========================
+   FORCE LANDSCAPE ON MOBILE
+========================= */
+
+@media screen and (orientation: portrait)
+and (max-width: 900px) {
+
+    body::before {
+
+        content:
+        "Please rotate your device to landscape mode";
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100vw;
+        height: 100vh;
+
+        background: #0a0a0f;
+
+        color: white;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        font-size: 6vw;
+
+        padding: 10vw;
+
+        z-index: 999999;
+    }
+
+    body > * {
+
+        display: none !important;
+    }
+    }
