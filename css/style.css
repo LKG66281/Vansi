@@ -5,7 +5,166 @@
     --primary: #00f5ff;
     --accent: #ff00ff;
 }
+/* =========================
+   GLOBAL RESPONSIVE SYSTEM
+========================= */
 
+html {
+
+    font-size: clamp(
+        12px,
+        0.9vw,
+        22px
+    );
+
+    overflow-x: hidden;
+}
+
+body {
+
+    width: 100vw;
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+/* =========================
+   UNIVERSAL SCALING
+========================= */
+
+* {
+
+    box-sizing: border-box;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button,
+.btn,
+.glow-btn {
+
+    min-width: 10vw;
+
+    min-height: 6vh;
+
+    padding:
+        1.2vh
+        1.6vw;
+
+    font-size: 1rem;
+
+    border-radius: 1vw;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input {
+
+    width: 100%;
+
+    min-height: 6vh;
+
+    padding:
+        1vh
+        1vw;
+
+    font-size: 1rem;
+
+    border-radius: 1vw;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1 {
+
+    font-size: clamp(
+        2rem,
+        5vw,
+        6rem
+    );
+}
+
+h2 {
+
+    font-size: clamp(
+        1.5rem,
+        3vw,
+        4rem
+    );
+}
+
+h3 {
+
+    font-size: clamp(
+        1.2rem,
+        2vw,
+        3rem
+    );
+}
+
+p,
+li,
+a {
+
+    font-size: clamp(
+        0.9rem,
+        1vw,
+        1.4rem
+    );
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card,
+.course-card {
+
+    padding: 2vw;
+
+    border-radius: 1.5vw;
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-bar {
+
+    min-height: 6vh;
+
+    padding: 1vh 1vw;
+
+    font-size: 1rem;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+
+    width: 18vw;
+
+    min-width: 220px;
+}
+
+.nav-item {
+
+    padding:
+        1.4vh
+        1vw;
+
+    font-size: 1rem;
+
+    border-radius: 1vw;
+    }
 * {
     margin: 0;
     padding: 0;
