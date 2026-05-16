@@ -45,7 +45,7 @@ function toggleTheme() {
 }
 
 // =========================
-// MOUSE + TOUCH TRAIL
+// RESPONSIVE TRAIL SYSTEM
 // =========================
 
 function initMouseTrail() {
@@ -89,19 +89,40 @@ function initMouseTrail() {
             this.x = x
             this.y = y
 
+            const motionScale =
+                Math.max(
+                    window.innerWidth / 1400,
+                    1
+                )
+
             this.vx =
-                (Math.random() - 0.5) * 3
+                (Math.random() - 0.5)
+                * 4
+                * motionScale
 
             this.vy =
-                (Math.random() - 0.5) * 3
+                (Math.random() - 0.5)
+                * 4
+                * motionScale
 
             this.life =
-                60 + Math.random() * 40
+                80 + Math.random() * 50
 
             this.color = color
 
+            const scaleFactor =
+                Math.min(
+                    window.innerWidth,
+                    window.innerHeight
+                ) / 1000
+
             this.size =
-                Math.random() * 4 + 2
+                (
+                    Math.random() * 8 + 6
+                ) * Math.max(
+                    scaleFactor,
+                    1
+                )
         }
 
         update() {
@@ -118,7 +139,7 @@ function initMouseTrail() {
         draw() {
 
             const alpha =
-                this.life / 100
+                this.life / 120
 
             ctx.save()
 
@@ -127,7 +148,11 @@ function initMouseTrail() {
             ctx.fillStyle =
                 this.color
 
-            ctx.shadowBlur = 15
+            ctx.shadowBlur =
+                Math.max(
+                    window.innerWidth / 50,
+                    25
+                )
 
             ctx.shadowColor =
                 this.color
@@ -164,7 +189,7 @@ function initMouseTrail() {
     }
 
     // =========================
-    // CREATE PARTICLES
+    // SPAWN PARTICLES
     // =========================
 
     function spawnParticles(
@@ -190,7 +215,19 @@ function initMouseTrail() {
                 : '#8a2be2'
             )
 
-        for (let i = 0; i < 4; i++) {
+        const particleBurst =
+            Math.max(
+                Math.floor(
+                    window.innerWidth / 250
+                ),
+                8
+            )
+
+        for (
+            let i = 0;
+            i < particleBurst;
+            i++
+        ) {
 
             particles.push(
 
@@ -204,7 +241,7 @@ function initMouseTrail() {
     }
 
     // =========================
-    // ANIMATION
+    // ANIMATE
     // =========================
 
     function animate() {
@@ -213,8 +250,8 @@ function initMouseTrail() {
             document.body
             .classList
             .contains('dark')
-            ? 'rgba(10,10,15,0.15)'
-            : 'rgba(240,244,255,0.15)'
+            ? 'rgba(10,10,15,0.10)'
+            : 'rgba(240,244,255,0.10)'
 
         ctx.fillRect(
             0,
@@ -247,7 +284,7 @@ function initMouseTrail() {
     }
 
     // =========================
-    // DESKTOP MOUSE
+    // MOUSE SUPPORT
     // =========================
 
     window.addEventListener(
@@ -289,7 +326,7 @@ function initMouseTrail() {
     )
 
     // =========================
-    // MOBILE TOUCH
+    // TOUCH SUPPORT
     // =========================
 
     window.addEventListener(
@@ -335,10 +372,6 @@ function initMouseTrail() {
         },
         { passive: true }
     )
-
-    // =========================
-    // RESIZE EVENT
-    // =========================
 
     window.addEventListener(
         'resize',
